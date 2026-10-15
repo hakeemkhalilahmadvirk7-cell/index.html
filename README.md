@@ -1,10 +1,9 @@
-# index.html
-It is the website of monthl<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>میرا حساب - مرکزی مالیاتی ڈیش بورڈ</title>
+    <title>میرا ماہانہ حساب</title>
     <style>
         :root {
             --primary-color: #0d9488;
@@ -73,7 +72,7 @@ It is the website of monthl<!DOCTYPE html>
         /* Show grid layout on big screens */
         @media (min-width: 1024px) {
             .portal-container {
-                grid-template-columns: 2fr 1fr 1fr;
+                grid-template-columns: 2fr 1fr;
             }
             .tab-btn {
                 display: none; /* Hide tab buttons on large desktop screens */
@@ -124,7 +123,7 @@ It is the website of monthl<!DOCTYPE html>
             margin-bottom: 20px;
         }
 
-        input, select, button {
+        input, select, button, textarea {
             padding: 10px;
             border: 1px solid #cbd5e1;
             border-radius: 6px;
@@ -168,27 +167,18 @@ It is the website of monthl<!DOCTYPE html>
             padding: 8px 0;
             border-bottom: 1px solid #e2e8f0;
         }
-
-        /* Placeholder Webviews */
-        .site-frame {
-            width: 100%;
-            height: 400px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-        }
     </style>
 </head>
-<body>
+<body onload="loadData()">
 
     <header>
-        <h1>میرا حساب - مرکزی مالیاتی پورٹل</h1>
+        <h1>میرا ماہانہ حساب</h1>
     </header>
 
     <!-- Mobile Navigation Tabs -->
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('tab-hisab')">۱. میرا حساب</button>
-        <button class="tab-btn" onclick="switchTab('tab-site2')">۲. ویب سائٹ دو</button>
-        <button class="tab-btn" onclick="switchTab('tab-site3')">۳. ویب سائٹ تین</button>
+        <button class="tab-btn" onclick="switchTab('tab-plan')">۲. میرا ترقیاتی منصوبہ</button>
     </div>
 
     <div class="portal-container">
@@ -252,18 +242,15 @@ It is the website of monthl<!DOCTYPE html>
             <ul id="history" class="history-list"></ul>
         </div>
 
-        <!-- SECTION 2: دوسری ویب سائٹ پورٹل -->
-        <div id="tab-site2" class="section-card" style="display: none;">
-            <h2 class="section-title">🌐 دوسری ویب سائٹ</h2>
-            <p style="margin-bottom: 10px;">یہاں آپ کی دوسری ویب سائٹ کی ونڈو کھلے گی:</p>
-            <iframe class="site-frame" src="about:blank" title="دوسری ویب سائٹ"></iframe>
-        </div>
-
-        <!-- SECTION 3: تیسری ویب سائٹ پورٹل -->
-        <div id="tab-site3" class="section-card" style="display: none;">
-            <h2 class="section-title">🌐 تیسری ویب سائٹ</h2>
-            <p style="margin-bottom: 10px;">یہاں آپ کی تیسری ویب سائٹ کی ونڈو کھلے گی:</p>
-            <iframe class="site-frame" src="about:blank" title="تیسری ویب سائٹ"></iframe>
+        <!-- SECTION 2: میرا ترقیاتی منصوبہ -->
+        <div id="tab-plan" class="section-card" style="display: none;">
+            <h2 class="section-title">🚀 میرا ترقیاتی منصوبہ</h2>
+            <p style="margin-bottom: 15px;">اپنے مالی اور ذاتی ترقیاتی اہداف یہاں درج کریں:</p>
+            <div class="input-group">
+                <textarea id="dev-plan-text" rows="6" placeholder="اپنے اہداف اور منصوبے یہاں لکھیں..." style="resize: vertical;"></textarea>
+                <button class="btn-add" onclick="saveDevPlan()">منصوبہ محفوظ کریں</button>
+            </div>
+            <p id="plan-status" style="color: var(--success-color); font-weight: bold; margin-top: 10px;"></p>
         </div>
 
     </div>
@@ -326,19 +313,27 @@ It is the website of monthl<!DOCTYPE html>
 
         function switchTab(tabId) {
             document.getElementById('tab-hisab').style.display = 'none';
-            document.getElementById('tab-site2').style.display = 'none';
-            document.getElementById('tab-site3').style.display = 'none';
+            document.getElementById('tab-plan').style.display = 'none';
 
             document.getElementById(tabId).style.display = 'block';
 
             const buttons = document.querySelectorAll('.tab-btn');
-                buttons.forEach(btn => btn.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
         }
 
         function saveData() {
-            const data = { totalIncome, totalExpense, folderTotals };
+            const devPlan = document.getElementById('dev-plan-text').value;
+            const data = { totalIncome, totalExpense, folderTotals, devPlan };
             localStorage.setItem('my_finance_data', JSON.stringify(data));
+        }
+
+        function saveDevPlan() {
+            saveData();
+            document.getElementById('plan-status').innerText = 'منصوبہ کامیابی سے محفوظ ہو گیا ہے!';
+            setTimeout(() => {
+                document.getElementById('plan-status').innerText = '';
+            }, 3000);
         }
 
         function loadData() {
@@ -348,12 +343,12 @@ It is the website of monthl<!DOCTYPE html>
                 totalIncome = data.totalIncome || 0;
                 totalExpense = data.totalExpense || 0;
                 folderTotals = data.folderTotals || folderTotals;
+                if (data.devPlan) {
+                    document.getElementById('dev-plan-text').value = data.devPlan;
+                }
                 updateDashboard();
             }
         }
-
-        // Load saved data on startup
-        loadData();
     </script>
 </body>
-</html>y calculations .
+</html>
