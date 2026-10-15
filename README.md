@@ -178,12 +178,13 @@
     <!-- Navigation Tabs -->
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('tab-hisab', event)">۱. میرا حساب</button>
+        <button class="tab-btn" onclick="switchTab('tab-form', event)">نیا اندراج کریں</button>
         <button class="tab-btn" onclick="switchTab('tab-plan', event)">۲. میرا ترقیاتی منصوبہ</button>
     </div>
 
     <div class="portal-container">
 
-        <!-- SECTION 1: میرا حساب (Dashboard, Form & Graphs) -->
+        <!-- SECTION 1: میرا حساب (Dashboard, Graphs & History) -->
         <div id="tab-hisab" class="section-card active-section">
             <h2 class="section-title">📊 میرا حساب (لائیو ڈیش بورڈ)</h2>
 
@@ -203,25 +204,7 @@
                 </div>
             </div>
 
-            <!-- Transaction Form -->
-            <h3>نیا اندراج کریں:</h3>
-            <div class="input-group">
-                <input type="text" id="desc" placeholder="تفصیل (مثلاً: گھر کا راشن، تنخواہ)">
-                <input type="number" id="amount" placeholder="رقم (روپے)">
-                <select id="type">
-                    <option value="income">آمدن (+)</option>
-                    <option value="expense">خرچہ (-)</option>
-                </select>
-                <select id="folder-select">
-                    <option value="عام">عام فولڈر</option>
-                    <option value="گروسری">گروسری و راشن</option>
-                    <option value="یوٹیلٹی بلز">یوٹیلٹی بلز</option>
-                    <option value="صحت و ادویات">صحت و ادویات</option>
-                </select>
-                <button class="btn-add" onclick="addTransaction()">شامل کریں</button>
-            </div>
-
-            <!-- 3 Financial Graphs Section (Replacing old folders) -->
+            <!-- 3 Financial Graphs Section -->
             <h3 style="margin-top: 15px;">📈 مالیاتی گراف (آمدن، خرچ، بچت):</h3>
             <div class="charts-container">
                 <div class="chart-box">
@@ -242,12 +225,33 @@
             <ul id="history" class="history-list"></ul>
         </div>
 
-        <!-- SECTION 2: میرا ترقیاتی منصوبہ -->
+        <!-- SECTION 2: نیا اندراج کرنے کا فارم (اب الگ ٹیب/صفحے پر ہے) -->
+        <div id="tab-form" class="section-card">
+            <h2 class="section-title">📝 نیا اندراج کریں</h2>
+            <div class="input-group">
+                <input type="text" id="desc" placeholder="تفصیل (مثلاً: گھر کا راشن، تنخواہ)">
+                <input type="number" id="amount" placeholder="رقم (روپے)">
+                <select id="type">
+                    <option value="income">آمدن (+)</option>
+                    <option value="expense">خرچہ (-)</option>
+                </select>
+                <select id="folder-select">
+                    <option value="عام">عام فولڈر</option>
+                    <option value="گروسری">گروسری و راشن</option>
+                    <option value="یوٹیلٹی بلز">یوٹیلٹی بلز</option>
+                    <option value="صحت و ادویات">صحت و ادویات</option>
+                </select>
+                <button class="btn-add" onclick="addTransaction()">شامل کریں</button>
+            </div>
+            <p id="form-status" style="color: var(--success-color); font-weight: bold; margin-top: 10px;"></p>
+        </div>
+
+        <!-- SECTION 3: میرا ترقیاتی منصوبہ -->
         <div id="tab-plan" class="section-card">
             <h2 class="section-title">🚀 میرا ترقیاتی منصوبہ</h2>
             <p style="margin-bottom: 15px;">اپنے مالی اور ذاتی ترقیاتی اہداف یہاں درج کریں:</p>
             <div class="input-group">
-                <textarea id="dev-plan-text" rows="6" placeholder="اپنے اہداف اور منصوبے یہاں لکھیں..." style="resize: vertical;"></textarea>
+                <textarea id="dev-plan-text" rows="6" placeholder="اپنے اهداف اور منصوبے یہاں لکھیں..." style="resize: vertical;"></textarea>
                 <button class="btn-add" onclick="saveDevPlan()">منصوبہ محفوظ کریں</button>
             </div>
             <p id="plan-status" style="color: var(--success-color); font-weight: bold; margin-top: 10px;"></p>
@@ -344,6 +348,11 @@
             document.getElementById('amount').value = '';
             
             saveData();
+            
+            document.getElementById('form-status').innerText = 'اندراج کامیابی سے شامل کر لیا گیا ہے!';
+            setTimeout(() => {
+                document.getElementById('form-status').innerText = '';
+            }, 3000);
         }
 
         function updateDashboard() {
@@ -363,7 +372,7 @@
             });
         }
 
-        // Tab Switching Logic (Opens separate page/view style)
+        // Tab Switching Logic
         function switchTab(tabId, event) {
             const sections = document.querySelectorAll('.section-card');
             sections.forEach(sec => sec.classList.remove('active-section'));
