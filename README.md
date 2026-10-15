@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>میرا ماہانہ حساب</title>
+    <!-- Chart.js CDN for Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary-color: #0d9488;
@@ -37,7 +39,7 @@
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
 
-        /* Nav Tabs for Mobile & Desktop */
+        /* Nav Tabs */
         .nav-tabs {
             display: flex;
             gap: 10px;
@@ -49,11 +51,11 @@
         .tab-btn {
             background: #cbd5e1;
             border: none;
-            padding: 12px 20px;
+            padding: 12px 25px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: 0.3s;
         }
 
@@ -62,24 +64,11 @@
             color: white;
         }
 
-        /* Layout Grid */
+        /* Layout Container */
         .portal-container {
-            display: grid;
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 20px;
-        }
-
-        /* Show grid layout on big screens */
-        @media (min-width: 1024px) {
-            .portal-container {
-                grid-template-columns: 2fr 1fr;
-            }
-            .tab-btn {
-                display: none; /* Hide tab buttons on large desktop screens */
-            }
-            .section-card {
-                display: block !important;
-            }
         }
 
         .section-card {
@@ -87,6 +76,11 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: none; /* Hidden by default, controlled by JS tabs */
+        }
+
+        .section-card.active-section {
+            display: block;
         }
 
         .section-title {
@@ -138,20 +132,26 @@
             font-weight: bold;
         }
 
-        /* Folders / Categories Section */
-        .folder-grid {
+        /* Graphs Section Container */
+        .charts-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
-        .folder-box {
-            border: 1px dashed var(--primary-color);
-            padding: 12px;
+        .chart-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
             border-radius: 8px;
             text-align: center;
-            background: #f8fafc;
+        }
+
+        .chart-box h4 {
+            margin-bottom: 10px;
+            color: var(--text-color);
         }
 
         /* History List */
@@ -169,22 +169,22 @@
         }
     </style>
 </head>
-<body onload="loadData()">
+<body onload="initApp()">
 
     <header>
         <h1>میرا ماہانہ حساب</h1>
     </header>
 
-    <!-- Mobile Navigation Tabs -->
+    <!-- Navigation Tabs -->
     <div class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('tab-hisab')">۱. میرا حساب</button>
-        <button class="tab-btn" onclick="switchTab('tab-plan')">۲. میرا ترقیاتی منصوبہ</button>
+        <button class="tab-btn active" onclick="switchTab('tab-hisab', event)">۱. میرا حساب</button>
+        <button class="tab-btn" onclick="switchTab('tab-plan', event)">۲. میرا ترقیاتی منصوبہ</button>
     </div>
 
     <div class="portal-container">
 
-        <!-- SECTION 1: میرا حساب (Calculator & Folders) -->
-        <div id="tab-hisab" class="section-card">
+        <!-- SECTION 1: میرا حساب (Dashboard, Form & Graphs) -->
+        <div id="tab-hisab" class="section-card active-section">
             <h2 class="section-title">📊 میرا حساب (لائیو ڈیش بورڈ)</h2>
 
             <!-- Stats Bar -->
@@ -221,20 +221,20 @@
                 <button class="btn-add" onclick="addTransaction()">شامل کریں</button>
             </div>
 
-            <!-- Custom Folders Section -->
-            <h3>📁 حساب کے فولڈرز (کاؤنٹرز):</h3>
-            <div class="folder-grid">
-                <div class="folder-box">
-                    <strong>گروسری</strong>
-                    <p id="f-grocery">Rs. 0</p>
+            <!-- 3 Financial Graphs Section (Replacing old folders) -->
+            <h3 style="margin-top: 15px;">📈 مالیاتی گراف (آمدن، خرچ، بچت):</h3>
+            <div class="charts-container">
+                <div class="chart-box">
+                    <h4>آمدن کا گراف</h4>
+                    <canvas id="incomeChart"></canvas>
                 </div>
-                <div class="folder-box">
-                    <strong>یوٹیلٹی بلز</strong>
-                    <p id="f-bills">Rs. 0</p>
+                <div class="chart-box">
+                    <h4>خرچے کا گراف</h4>
+                    <canvas id="expenseChart"></canvas>
                 </div>
-                <div class="folder-box">
-                    <strong>صحت و ادویات</strong>
-                    <p id="f-health">Rs. 0</p>
+                <div class="chart-box">
+                    <h4>بچت (بقايا) کا گراف</h4>
+                    <canvas id="balanceChart"></canvas>
                 </div>
             </div>
 
@@ -243,7 +243,7 @@
         </div>
 
         <!-- SECTION 2: میرا ترقیاتی منصوبہ -->
-        <div id="tab-plan" class="section-card" style="display: none;">
+        <div id="tab-plan" class="section-card">
             <h2 class="section-title">🚀 میرا ترقیاتی منصوبہ</h2>
             <p style="margin-bottom: 15px;">اپنے مالی اور ذاتی ترقیاتی اہداف یہاں درج کریں:</p>
             <div class="input-group">
@@ -258,11 +258,62 @@
     <script>
         let totalIncome = 0;
         let totalExpense = 0;
-        let folderTotals = {
-            'گروسری': 0,
-            'یوٹیلٹی بلز': 0,
-            'صحت و ادویات': 0
-        };
+        let historyData = [];
+        
+        let incomeChart, expenseChart, balanceChart;
+
+        function initApp() {
+            loadData();
+            initCharts();
+            updateDashboard();
+        }
+
+        // Initialize Chart.js instances
+        function initCharts() {
+            const commonOptions = {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { display: false } }
+            };
+
+            incomeChart = new Chart(document.getElementById('incomeChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['آمدن'],
+                    datasets: [{ data: [totalIncome], backgroundColor: '#16a34a' }]
+                },
+                options: commonOptions
+            });
+
+            expenseChart = new Chart(document.getElementById('expenseChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['خرچہ'],
+                    datasets: [{ data: [totalExpense], backgroundColor: '#e11d48' }]
+                },
+                options: commonOptions
+            });
+
+            balanceChart = new Chart(document.getElementById('balanceChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['بچت/بقايا'],
+                    datasets: [{ data: [totalIncome - totalExpense], backgroundColor: '#0284c7' }]
+                },
+                options: commonOptions
+            });
+        }
+
+        function updateCharts() {
+            incomeChart.data.datasets[0].data = [totalIncome];
+            incomeChart.update();
+
+            expenseChart.data.datasets[0].data = [totalExpense];
+            expenseChart.update();
+
+            balanceChart.data.datasets[0].data = [totalIncome - totalExpense];
+            balanceChart.update();
+        }
 
         function addTransaction() {
             const desc = document.getElementById('desc').value;
@@ -279,25 +330,19 @@
                 totalIncome += amount;
             } else {
                 totalExpense += amount;
-                if (folderTotals[folder] !== undefined) {
-                    folderTotals[folder] += amount;
-                }
             }
 
-            updateDashboard();
+            const transaction = { desc, amount, type, folder };
+            historyData.unshift(transaction);
 
-            // Add to history
-            const historyList = document.getElementById('history');
-            const li = document.createElement('li');
-            li.className = 'history-item';
-            li.innerHTML = `<span>${desc} (${folder})</span> <strong style="color: ${type === 'income' ? 'green' : 'red'};">${type === 'income' ? '+' : '-'} Rs. ${amount}</strong>`;
-            historyList.prepend(li);
+            updateDashboard();
+            updateCharts();
+            renderHistory();
 
             // Clear inputs
             document.getElementById('desc').value = '';
             document.getElementById('amount').value = '';
             
-            // Save to memory
             saveData();
         }
 
@@ -305,17 +350,25 @@
             document.getElementById('total-income').innerText = `Rs. ${totalIncome}`;
             document.getElementById('total-expense').innerText = `Rs. ${totalExpense}`;
             document.getElementById('net-balance').innerText = `Rs. ${totalIncome - totalExpense}`;
-
-            if(document.getElementById('f-grocery')) document.getElementById('f-grocery').innerText = `Rs. ${folderTotals['گروسری']}`;
-            if(document.getElementById('f-bills')) document.getElementById('f-bills').innerText = `Rs. ${folderTotals['یوٹیلٹی بلز']}`;
-            if(document.getElementById('f-health')) document.getElementById('f-health').innerText = `Rs. ${folderTotals['صحت و ادویات']}`;
         }
 
-        function switchTab(tabId) {
-            document.getElementById('tab-hisab').style.display = 'none';
-            document.getElementById('tab-plan').style.display = 'none';
+        function renderHistory() {
+            const historyList = document.getElementById('history');
+            historyList.innerHTML = '';
+            historyData.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'history-item';
+                li.innerHTML = `<span>${item.desc} (${item.folder})</span> <strong style="color: ${item.type === 'income' ? 'green' : 'red'};">${item.type === 'income' ? '+' : '-'} Rs. ${item.amount}</strong>`;
+                historyList.appendChild(li);
+            });
+        }
 
-            document.getElementById(tabId).style.display = 'block';
+        // Tab Switching Logic (Opens separate page/view style)
+        function switchTab(tabId, event) {
+            const sections = document.querySelectorAll('.section-card');
+            sections.forEach(sec => sec.classList.remove('active-section'));
+
+            document.getElementById(tabId).classList.add('active-section');
 
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
@@ -324,7 +377,7 @@
 
         function saveData() {
             const devPlan = document.getElementById('dev-plan-text').value;
-            const data = { totalIncome, totalExpense, folderTotals, devPlan };
+            const data = { totalIncome, totalExpense, historyData, devPlan };
             localStorage.setItem('my_finance_data', JSON.stringify(data));
         }
 
@@ -342,11 +395,11 @@
                 const data = JSON.parse(saved);
                 totalIncome = data.totalIncome || 0;
                 totalExpense = data.totalExpense || 0;
-                folderTotals = data.folderTotals || folderTotals;
+                historyData = data.historyData || [];
                 if (data.devPlan) {
                     document.getElementById('dev-plan-text').value = data.devPlan;
                 }
-                updateDashboard();
+                renderHistory();
             }
         }
     </script>
