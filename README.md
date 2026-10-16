@@ -62,7 +62,7 @@
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            display: none; /* Hidden by default */
+            display: none;
         }
 
         .section-card.active-section {
@@ -190,7 +190,7 @@
             font-size: 1rem;
         }
 
-        /* فیملی کی خوبصورت تصویر کی سٹائلنگ */
+        /* فیملی کی تصویر کی سٹائلنگ */
         .family-image-container {
             margin-top: 25px;
             text-align: center;
@@ -294,10 +294,9 @@
                 </div>
             </div>
 
-            <!-- 1. مالیاتی گراف کے نیچے فیملی کی تصویر -->
+            <!-- مالیاتی گراف کے نیچے تصویر -->
             <div class="family-image-container">
-                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fstackoverflow.com%2F...&psig=...&ust=..." alt="خوشحال فیملی" style="display:none;" /> <!-- Placeholder fallback -->
-                <img src="watermarked_img_1323761495528244343.jpg" alt="خوشحال فیملی کی تصویر">
+                <img src="watermarked_img_1323761495528244343.jpg" alt="">
             </div>
         </div>
 
@@ -396,9 +395,9 @@
             <button class="footer-btn" onclick="switchSection('tab-contact')">Contact Us</button>
         </div>
         
-        <!-- 2. فوٹر کے نیچے فیملی کی تصویر -->
+        <!-- فوٹر کے نیچے تصویر -->
         <div style="max-width: 450px; margin: 20px auto 10px auto;">
-            <img src="watermarked_img_1323761495528244343.jpg" alt="خوشحال فیملی" style="width: 100%; border-radius: 8px; border: 2px solid #475569; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+            <img src="watermarked_img_1323761495528244343.jpg" alt="" style="width: 100%; border-radius: 8px; border: 2px solid #475569; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
         </div>
 
         <p style="font-size: 0.95rem; color: #94a3b8; margin-top: 15px;">&copy; 2026 میرا ماہانہ حساب - جملہ حقوق محفوظ ہیں۔</p>
