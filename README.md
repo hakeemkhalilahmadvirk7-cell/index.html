@@ -199,7 +199,7 @@
                     <p id="total-expense">Rs. 0</p>
                 </div>
                 <div class="stat-box balance-bg">
-                    <h4>بقايا رقم</h4>
+                    <h4>بچت</h4>
                     <p id="net-balance">Rs. 0</p>
                 </div>
             </div>
