@@ -32,23 +32,6 @@
             min-height: 100vh;
         }
 
-        /* 1. بڑا ہیڈر */
-        header {
-            text-align: center;
-            padding: 35px 15px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-
-        header h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
         /* Portal Container */
         .portal-container {
             flex: 1;
@@ -81,7 +64,7 @@
         /* 2. واپس جائیں والا بٹن بائیں طرف */
         .top-navigation {
             display: flex;
-            justify-content: flex-end; /* RTL میں flex-end بائیں طرف بنتا ہے */
+            justify-content: flex-end; /* RTL میں flex-end کا مطلب بائیں جانب ہوتا ہے */
             margin-bottom: 15px;
         }
 
@@ -116,7 +99,7 @@
         }
 
         .stat-box-btn {
-            padding: 12px 8px;
+            padding: 14px 8px;
             border-radius: 8px;
             text-align: center;
             color: white;
@@ -136,13 +119,13 @@
         }
 
         .stat-box-btn h4 {
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 4px;
         }
 
         .stat-box-btn p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: bold;
         }
 
@@ -151,7 +134,7 @@
         .balance-bg { background-color: #0284c7; }
         .plan-bg { background-color: var(--primary-color); }
 
-        /* Form Styling (3. صرف 2 ان پٹ فیلڈز اور ایک بٹن) */
+        /* Form Styling */
         .input-group {
             display: flex;
             flex-direction: column;
@@ -222,7 +205,7 @@
             font-size: 1.05rem;
         }
 
-        /* فیملی کی تصویر کی سٹائلنگ */
+        /* فیملی کی تصویر */
         .family-image-container {
             margin-top: 25px;
             text-align: center;
@@ -239,55 +222,117 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        /* 5. بڑا فوٹر */
+        /* 4, 6. جدید بڑا فوٹر جو چوڑا ہے اور اوپر نیچے سے سائز کم ہے */
         footer {
-            margin-top: 50px;
+            margin-top: 35px;
             background: #0f172a;
             color: white;
-            padding: 45px 20px;
-            border-radius: 14px;
-            text-align: center;
+            padding: 20px 30px; /* اوپر نیچے سے کم سائز */
+            border-radius: 12px;
+            width: 100%; /* لمبائی میں بڑا */
             box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
         }
 
-        .footer-links {
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-sec {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #334155;
+        }
+
+        .footer-sec h4 {
+            color: #38bdf8;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .yt-search-box {
+            display: flex;
+            gap: 8px;
+        }
+
+        .yt-search-box input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        .yt-search-box button {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .yt-links-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .yt-link-btn {
+            background: #ef4444;
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .yt-link-btn:hover {
+            background: #dc2626;
+        }
+
+        .footer-bottom-links {
             display: flex;
             justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-top: 15px;
+            border-top: 1px solid #334155;
+            padding-top: 12px;
         }
 
         .footer-btn {
             background: transparent;
             border: 1px solid #475569;
             color: white;
-            padding: 12px 26px;
-            border-radius: 8px;
+            padding: 6px 16px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: 0.3s;
-            font-size: 1.1rem;
-            font-weight: 500;
+            font-size: 0.9rem;
         }
 
         .footer-btn:hover {
             background: var(--primary-color);
-            border-color: var(--primary-color);
         }
     </style>
 </head>
 <body onload="initApp()">
 
-    <!-- بڑا ہیڈر -->
-    <header>
-        <h1>میرا ماہانہ حساب</h1>
-    </header>
-
     <div class="portal-container">
 
-        <!-- مین ڈیش بورڈ -->
+        <!-- 5. ڈیش بورڈ (اوپر والا ہیڈر ختم کر دیا گیا ہے) -->
         <div id="tab-hisab" class="section-card active-section">
-            <h2 class="section-title">📊 مرکزی مالیاتی ڈیش بورڈ</h2>
+            <h2 class="section-title">📊 مرکزی مالیاتی ڈیش بورڈ (میرا ماہانہ حساب)</h2>
 
             <!-- چاروں بٹنز ایک ہی لائن میں -->
             <div class="stats-grid">
@@ -332,33 +377,32 @@
             </div>
         </div>
 
-        <!-- 1, 2, 3: کل آمدن اور نیا اندراج کا پیج -->
+        <!-- 1, 2. کل آمدن اور نیا اندراج کا پیج (بڑا ہیڈر اور بائیں طرف بٹن) -->
         <div id="tab-income-page" class="section-card">
             <!-- 2. بائیں طرف واپس جانے کا بٹن -->
             <div class="top-navigation">
                 <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
             </div>
 
-            <!-- 1. بڑا ہیڈر اس پیج کا -->
-            <div style="background: var(--primary-color); color: white; padding: 25px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
-                <h1 style="font-size: 2.2rem;">💵 کل آمدن اور نیا اندراج</h1>
+            <!-- 1. بڑا ہیڈر -->
+            <div style="background: var(--primary-color); color: white; padding: 35px 20px; border-radius: 12px; text-align: center; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <h1 style="font-size: 2.8rem; font-weight: bold;">💵 کل آمدن اور نیا اندراج</h1>
             </div>
 
             <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 18px; border-radius: 8px; margin-bottom: 25px;">
                 <h3 style="font-size: 1.4rem;">موجودہ کل آمدن: <span id="income-page-total" style="color: var(--success-color);">Rs. 0</span></h3>
             </div>
 
-            <!-- 3. نیا اندراج کریں فارم (خرچہ اور عام فولڈر ہٹا دیے گئے ہیں) -->
             <h2 style="margin-bottom: 15px; color: var(--primary-color);">📝 نیا اندراج کریں:</h2>
             <div class="input-group">
                 <input type="text" id="desc" placeholder="تفصیل (مثلاً: تنخواہ، بزنس منافع، تحفہ)">
                 <input type="number" id="amount" placeholder="رقم (روپے)">
-                <!-- 4. شامل کریں بٹن پر کلک سے نیا پیج کھلے گا -->
+                <!-- 3. شامل کریں پر نیا پیج کھلے گا -->
                 <button class="btn-add" onclick="addIncomeTransaction()">شامل کریں</button>
             </div>
         </div>
 
-        <!-- 4. نیا پیج: آمدن کی تمام تفصیلات -->
+        <!-- 3. نیا پیج: آمدن کی تمام تفصیلات -->
         <div id="tab-income-details" class="section-card">
             <div class="top-navigation">
                 <button class="btn-back" onclick="switchSection('tab-income-page')">← واپس اندراج فارم پر جائیں</button>
@@ -367,11 +411,11 @@
             <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">آپ کی درج کردہ تمام آمدنیوں کی لسٹ درج ذیل ہے:</p>
             
             <ul id="income-details-list" class="details-list">
-                <!-- یہاں جاوا سکرپٹ کے ذریعے آمدن کی تمام لسٹ آئے گی -->
+                <!-- جاوا سکرپٹ کے ذریعے آمدن کی تمام لسٹ آئے گی -->
             </ul>
         </div>
 
-        <!-- کل خرچ کا الگ صفحہ -->
+        <!-- کل خرچ کا پیج -->
         <div id="tab-expense-page" class="section-card">
             <div class="top-navigation">
                 <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
@@ -382,7 +426,7 @@
             </div>
         </div>
 
-        <!-- بقایا رقم کا الگ صفحہ -->
+        <!-- بقایا رقم کا پیج -->
         <div id="tab-balance-page" class="section-card">
             <div class="top-navigation">
                 <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
@@ -443,20 +487,42 @@
 
     </div>
 
-    <!-- 5. بڑا فوٹر -->
+    <!-- 4, 6. بڑا چوڑا فوٹر جس کے دو حصے ہیں -->
     <footer>
-        <div class="footer-links">
+        <div class="footer-grid">
+            <!-- حصہ ۱: یوٹیوب سرچ بار -->
+            <div class="footer-sec">
+                <h4>🔍 آمدنی بڑھانے کے لیے یوٹیوب سرچ کریں:</h4>
+                <div class="yt-search-box">
+                    <input type="text" id="ytQuery" placeholder="مثلاً: آمدنی بڑھانے کے طریقے...">
+                    <button onclick="searchYouTube()">سرچ کریں</button>
+                </div>
+            </div>
+
+            <!-- حصہ ۲: آمدنی بڑھانے والے چینلز و لنکس -->
+            <div class="footer-sec">
+                <h4>🎥 آمدنی بڑھانے والی ویڈیوز اور چینلز:</h4>
+                <div class="yt-links-grid">
+                    <a class="yt-link-btn" href="https://www.youtube.com/results?search_query=how+to+increase+income+in+urdu" target="_blank">▶ آمدنی بڑھانے کے طریقے</a>
+                    <a class="yt-link-btn" href="https://www.youtube.com/results?search_query=online+earning+in+pakistan" target="_blank">▶ آن لائن کمائی</a>
+                    <a class="yt-link-btn" href="https://www.youtube.com/results?search_query=business+ideas+in+urdu" target="_blank">▶ بزنس آئیڈیاز</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- فوٹر کے نچلے لنکس -->
+        <div class="footer-bottom-links">
             <button class="footer-btn" onclick="switchSection('tab-about')">About Us</button>
             <button class="footer-btn" onclick="switchSection('tab-privacy')">Privacy</button>
             <button class="footer-btn" onclick="switchSection('tab-contact')">Contact Us</button>
         </div>
-        
-        <!-- فوٹر کے نیچے تصویر -->
-        <div style="max-width: 500px; margin: 25px auto 15px auto;">
-            <img src="watermarked_img_1323761495528244343.jpg" alt="" style="width: 100%; border-radius: 10px; border: 3px solid #475569; box-shadow: 0 4px 8px rgba(0,0,0,0.4);">
+
+        <!-- فوٹر میں تصویر -->
+        <div style="max-width: 400px; margin: 12px auto 5px auto;">
+            <img src="watermarked_img_1323761495528244343.jpg" alt="" style="width: 100%; border-radius: 8px; border: 2px solid #475569;">
         </div>
 
-        <p style="font-size: 1rem; color: #94a3b8; margin-top: 15px;">&copy; 2026 میرا ماہانہ حساب - جملہ حقوق محفوظ ہیں۔</p>
+        <p style="font-size: 0.85rem; color: #94a3b8; text-align: center; margin-top: 8px;">&copy; 2026 میرا ماہانہ حساب - جملہ حقوق محفوظ ہیں۔</p>
     </footer>
 
     <script>
@@ -518,7 +584,7 @@
             balanceChart.update();
         }
 
-        // 4. آمدن کا نیا اندراج کرنے اور نئے تفصیلات والے پیج پر منتقل ہونے کا فنکشن
+        // 3. آمدن کا اندراج اور لسٹ کا نیا پیج کھولنا
         function addIncomeTransaction() {
             const desc = document.getElementById('desc').value;
             const amount = parseFloat(document.getElementById('amount').value);
@@ -540,7 +606,7 @@
             
             saveData();
 
-            // نیا پیج کھولیں (آمدن کی تفصیلات والا پیج)
+            // نیا پیج کھولیں
             switchSection('tab-income-details');
         }
 
@@ -562,6 +628,17 @@
                 `;
                 listElement.appendChild(li);
             });
+        }
+
+        // 6. یوٹیوب سرچ فنکشن
+        function searchYouTube() {
+            const query = document.getElementById('ytQuery').value;
+            if(query.trim() !== "") {
+                const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+                window.open(url, '_blank');
+            } else {
+                alert("براہ کرم سرچ کرنے کے لیے کچھ لکھیں!");
+            }
         }
 
         function updateDashboard() {
