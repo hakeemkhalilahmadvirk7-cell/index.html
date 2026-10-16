@@ -32,10 +32,10 @@
             min-height: 100vh;
         }
 
-        /* بڑا ہیڈر */
+        /* 1. بڑا ہیڈر */
         header {
             text-align: center;
-            padding: 30px 15px;
+            padding: 35px 15px;
             background: var(--primary-color);
             color: white;
             border-radius: 12px;
@@ -44,7 +44,7 @@
         }
 
         header h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 800;
             letter-spacing: 1px;
         }
@@ -70,11 +70,35 @@
         }
 
         .section-title {
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 12px;
             margin-bottom: 20px;
             color: var(--primary-color);
-            font-size: 1.6rem;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* 2. واپس جائیں والا بٹن بائیں طرف */
+        .top-navigation {
+            display: flex;
+            justify-content: flex-end; /* RTL میں flex-end بائیں طرف بنتا ہے */
+            margin-bottom: 15px;
+        }
+
+        .btn-back {
+            background: #64748b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #475569;
         }
 
         /* چاروں بٹن ایک ہی لائن میں */
@@ -92,7 +116,7 @@
         }
 
         .stat-box-btn {
-            padding: 10px 8px;
+            padding: 12px 8px;
             border-radius: 8px;
             text-align: center;
             color: white;
@@ -112,13 +136,13 @@
         }
 
         .stat-box-btn h4 {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 4px;
         }
 
         .stat-box-btn p {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: bold;
         }
 
@@ -127,39 +151,36 @@
         .balance-bg { background-color: #0284c7; }
         .plan-bg { background-color: var(--primary-color); }
 
-        /* Form Styling */
+        /* Form Styling (3. صرف 2 ان پٹ فیلڈز اور ایک بٹن) */
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
             margin-bottom: 20px;
             max-width: 600px;
         }
 
-        input, select, button, textarea {
-            padding: 12px;
+        input, textarea {
+            padding: 14px;
             border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 1.05rem;
         }
 
         .btn-add {
             background: var(--primary-color);
             color: white;
             border: none;
+            padding: 14px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
         }
 
-        .btn-back {
-            background: #64748b;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
+        .btn-add:hover {
+            background: #0f766e;
         }
 
         /* مالیاتی گراف ایک ہی لائن میں */
@@ -184,10 +205,21 @@
             text-align: center;
         }
 
-        .chart-box h4 {
+        /* تفصیلات کی لسٹ اسٹائلنگ */
+        .details-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .details-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
             margin-bottom: 10px;
-            color: var(--text-color);
-            font-size: 1rem;
+            font-size: 1.05rem;
         }
 
         /* فیملی کی تصویر کی سٹائلنگ */
@@ -207,15 +239,15 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        /* بڑا فوٹر */
+        /* 5. بڑا فوٹر */
         footer {
-            margin-top: 40px;
+            margin-top: 50px;
             background: #0f172a;
             color: white;
-            padding: 35px 20px;
-            border-radius: 12px;
+            padding: 45px 20px;
+            border-radius: 14px;
             text-align: center;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
         }
 
         .footer-links {
@@ -223,18 +255,18 @@
             justify-content: center;
             gap: 25px;
             flex-wrap: wrap;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .footer-btn {
             background: transparent;
             border: 1px solid #475569;
             color: white;
-            padding: 10px 22px;
+            padding: 12px 26px;
             border-radius: 8px;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 500;
         }
 
@@ -300,36 +332,50 @@
             </div>
         </div>
 
-        <!-- کل آمدن کا نیا صفحہ -->
+        <!-- 1, 2, 3: کل آمدن اور نیا اندراج کا پیج -->
         <div id="tab-income-page" class="section-card">
-            <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
-            <h2 class="section-title">💵 کل آمدن اور نیا اندراج</h2>
-            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h3>موجودہ کل آمدن: <span id="income-page-total" style="color: var(--success-color);">Rs. 0</span></h3>
+            <!-- 2. بائیں طرف واپس جانے کا بٹن -->
+            <div class="top-navigation">
+                <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
             </div>
 
-            <h3>نیا اندراج کریں:</h3>
-            <div class="input-group" style="margin-top: 10px;">
-                <input type="text" id="desc" placeholder="تفصیل (مثلاً: گھر کا راشن، تنخواہ)">
-                <input type="number" id="amount" placeholder="رقم (روپے)">
-                <select id="type">
-                    <option value="income">آمدن (+)</option>
-                    <option value="expense">خرچہ (-)</option>
-                </select>
-                <select id="folder-select">
-                    <option value="عام">عام فولڈر</option>
-                    <option value="گروسری">گروسری و راشن</option>
-                    <option value="یوٹیلٹی بلز">یوٹیلٹی بلز</option>
-                    <option value="صحت و ادویات">صحت و ادویات</option>
-                </select>
-                <button class="btn-add" onclick="addTransaction()">شامل کریں</button>
+            <!-- 1. بڑا ہیڈر اس پیج کا -->
+            <div style="background: var(--primary-color); color: white; padding: 25px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                <h1 style="font-size: 2.2rem;">💵 کل آمدن اور نیا اندراج</h1>
             </div>
-            <p id="form-status" style="color: var(--success-color); font-weight: bold; margin-top: 10px;"></p>
+
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 18px; border-radius: 8px; margin-bottom: 25px;">
+                <h3 style="font-size: 1.4rem;">موجودہ کل آمدن: <span id="income-page-total" style="color: var(--success-color);">Rs. 0</span></h3>
+            </div>
+
+            <!-- 3. نیا اندراج کریں فارم (خرچہ اور عام فولڈر ہٹا دیے گئے ہیں) -->
+            <h2 style="margin-bottom: 15px; color: var(--primary-color);">📝 نیا اندراج کریں:</h2>
+            <div class="input-group">
+                <input type="text" id="desc" placeholder="تفصیل (مثلاً: تنخواہ، بزنس منافع، تحفہ)">
+                <input type="number" id="amount" placeholder="رقم (روپے)">
+                <!-- 4. شامل کریں بٹن پر کلک سے نیا پیج کھلے گا -->
+                <button class="btn-add" onclick="addIncomeTransaction()">شامل کریں</button>
+            </div>
+        </div>
+
+        <!-- 4. نیا پیج: آمدن کی تمام تفصیلات -->
+        <div id="tab-income-details" class="section-card">
+            <div class="top-navigation">
+                <button class="btn-back" onclick="switchSection('tab-income-page')">← واپس اندراج فارم پر جائیں</button>
+            </div>
+            <h2 class="section-title">📋 آمدن کی تمام تفصیلات</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">آپ کی درج کردہ تمام آمدنیوں کی لسٹ درج ذیل ہے:</p>
+            
+            <ul id="income-details-list" class="details-list">
+                <!-- یہاں جاوا سکرپٹ کے ذریعے آمدن کی تمام لسٹ آئے گی -->
+            </ul>
         </div>
 
         <!-- کل خرچ کا الگ صفحہ -->
         <div id="tab-expense-page" class="section-card">
-            <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            <div class="top-navigation">
+                <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            </div>
             <h2 class="section-title">💸 کل خرچ کی تفصیل</h2>
             <div style="background: #fff1f2; border: 1px solid #fecdd3; padding: 20px; border-radius: 8px;">
                 <h3>موجودہ کل خرچہ: <span id="expense-page-total" style="color: var(--danger-color);">Rs. 0</span></h3>
@@ -338,7 +384,9 @@
 
         <!-- بقایا رقم کا الگ صفحہ -->
         <div id="tab-balance-page" class="section-card">
-            <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            <div class="top-navigation">
+                <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            </div>
             <h2 class="section-title">🏦 بقایا رقم (بچت)</h2>
             <div style="background: #f0f9ff; border: 1px solid #bae6fd; padding: 20px; border-radius: 8px;">
                 <h3>موجودہ بقایا رقم: <span id="balance-page-total" style="color: #0284c7;">Rs. 0</span></h3>
@@ -347,7 +395,9 @@
 
         <!-- میرا ترقیاتی منصوبہ کا صفحہ -->
         <div id="tab-plan" class="section-card">
-            <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            <div class="top-navigation">
+                <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            </div>
             <h2 class="section-title">🚀 میرا ترقیاتی منصوبہ</h2>
             <p style="margin-bottom: 15px;">اپنے مالی اور ذاتی ترقیاتی اہداف یہاں درج کریں:</p>
             <div class="input-group">
@@ -359,7 +409,9 @@
 
         <!-- About Us کا صفحہ -->
         <div id="tab-about" class="section-card">
-            <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            <div class="top-navigation">
+                <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            </div>
             <h2 class="section-title">ℹ️ ہمارے بارے میں (About Us)</h2>
             <p style="line-height: 1.8; color: #475569; font-size: 1.05rem;">
                 "میرا ماہانہ حساب" ایک جدید اور آسان ڈیجیٹل مالیاتی پلیٹ فارم ہے جو آپ کو اپنے روزمرہ کے اخراجات، آمدن، اور بچت کا حساب کتاب رکھنے میں مدد فراہم کرتا ہے۔
@@ -368,7 +420,9 @@
 
         <!-- Privacy Policy کا صفحہ -->
         <div id="tab-privacy" class="section-card">
-            <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            <div class="top-navigation">
+                <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            </div>
             <h2 class="section-title">🔒 پرائیویسی پالیسی (Privacy Policy)</h2>
             <p style="line-height: 1.8; color: #475569; font-size: 1.05rem;">
                 آپ کی رازداری ہمارے لیے انتہائی اہم ہے۔ اس ایپلیکیشن میں درج کیا جانے والا تمام ڈیٹا آپ کے اپنے براؤزر کے لوکل سٹوریج میں محفوظ ہوتا ہے۔
@@ -377,7 +431,9 @@
 
         <!-- Contact Us کا صفحہ -->
         <div id="tab-contact" class="section-card">
-            <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            <div class="top-navigation">
+                <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            </div>
             <h2 class="section-title">📞 رابطہ کریں (Contact Us)</h2>
             <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 1.05rem;">
                 <p><strong>ای میل:</strong> support@merasahisab.com</p>
@@ -387,7 +443,7 @@
 
     </div>
 
-    <!-- بڑا فوٹر -->
+    <!-- 5. بڑا فوٹر -->
     <footer>
         <div class="footer-links">
             <button class="footer-btn" onclick="switchSection('tab-about')">About Us</button>
@@ -396,17 +452,17 @@
         </div>
         
         <!-- فوٹر کے نیچے تصویر -->
-        <div style="max-width: 450px; margin: 20px auto 10px auto;">
-            <img src="watermarked_img_1323761495528244343.jpg" alt="" style="width: 100%; border-radius: 8px; border: 2px solid #475569; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        <div style="max-width: 500px; margin: 25px auto 15px auto;">
+            <img src="watermarked_img_1323761495528244343.jpg" alt="" style="width: 100%; border-radius: 10px; border: 3px solid #475569; box-shadow: 0 4px 8px rgba(0,0,0,0.4);">
         </div>
 
-        <p style="font-size: 0.95rem; color: #94a3b8; margin-top: 15px;">&copy; 2026 میرا ماہانہ حساب - جملہ حقوق محفوظ ہیں۔</p>
+        <p style="font-size: 1rem; color: #94a3b8; margin-top: 15px;">&copy; 2026 میرا ماہانہ حساب - جملہ حقوق محفوظ ہیں۔</p>
     </footer>
 
     <script>
         let totalIncome = 0;
         let totalExpense = 0;
-        let historyData = [];
+        let incomeList = [];
         
         let incomeChart, expenseChart, balanceChart;
 
@@ -462,38 +518,50 @@
             balanceChart.update();
         }
 
-        function addTransaction() {
+        // 4. آمدن کا نیا اندراج کرنے اور نئے تفصیلات والے پیج پر منتقل ہونے کا فنکشن
+        function addIncomeTransaction() {
             const desc = document.getElementById('desc').value;
             const amount = parseFloat(document.getElementById('amount').value);
-            const type = document.getElementById('type').value;
-            const folder = document.getElementById('folder-select').value;
 
             if (!desc || isNaN(amount) || amount <= 0) {
                 alert('براہ کرم صحیح تفصیل اور رقم درج کریں!');
                 return;
             }
 
-            if (type === 'income') {
-                totalIncome += amount;
-            } else {
-                totalExpense += amount;
-            }
-
-            const transaction = { desc, amount, type, folder };
-            historyData.unshift(transaction);
+            totalIncome += amount;
+            incomeList.unshift({ desc, amount, date: new Date().toLocaleDateString('ur-PK') });
 
             updateDashboard();
             updateCharts();
+            renderIncomeDetails();
 
             document.getElementById('desc').value = '';
             document.getElementById('amount').value = '';
             
             saveData();
-            
-            document.getElementById('form-status').innerText = 'اندراج کامیابی سے شامل کر لیا گیا ہے!';
-            setTimeout(() => {
-                document.getElementById('form-status').innerText = '';
-            }, 3000);
+
+            // نیا پیج کھولیں (آمدن کی تفصیلات والا پیج)
+            switchSection('tab-income-details');
+        }
+
+        function renderIncomeDetails() {
+            const listElement = document.getElementById('income-details-list');
+            listElement.innerHTML = '';
+
+            if (incomeList.length === 0) {
+                listElement.innerHTML = '<li class="details-item">ابھی تک کوئی آمدن درج نہیں کی گئی۔</li>';
+                return;
+            }
+
+            incomeList.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'details-item';
+                li.innerHTML = `
+                    <span><strong>${item.desc}</strong></span>
+                    <span style="color: var(--success-color); font-weight: bold;">+ Rs. ${item.amount}</span>
+                `;
+                listElement.appendChild(li);
+            });
         }
 
         function updateDashboard() {
@@ -518,7 +586,7 @@
 
         function saveData() {
             const devPlan = document.getElementById('dev-plan-text').value;
-            const data = { totalIncome, totalExpense, historyData, devPlan };
+            const data = { totalIncome, totalExpense, incomeList, devPlan };
             localStorage.setItem('my_finance_data', JSON.stringify(data));
         }
 
@@ -536,10 +604,11 @@
                 const data = JSON.parse(saved);
                 totalIncome = data.totalIncome || 0;
                 totalExpense = data.totalExpense || 0;
-                historyData = data.historyData || [];
+                incomeList = data.incomeList || [];
                 if (data.devPlan) {
                     document.getElementById('dev-plan-text').value = data.devPlan;
                 }
+                renderIncomeDetails();
             }
         }
     </script>
