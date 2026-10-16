@@ -32,7 +32,7 @@
             min-height: 100vh;
         }
 
-        /* 1. بڑا ہیڈر */
+        /* بڑا ہیڈر */
         header {
             text-align: center;
             padding: 30px 15px;
@@ -77,7 +77,7 @@
             font-size: 1.6rem;
         }
 
-        /* 2. چاروں بٹن ایک ہی لائن میں */
+        /* چاروں بٹن ایک ہی لائن میں */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -162,7 +162,7 @@
             font-size: 0.95rem;
         }
 
-        /* 4. مالیاتی گراف ایک ہی لائن میں */
+        /* مالیاتی گراف ایک ہی لائن میں */
         .charts-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -190,7 +190,24 @@
             font-size: 1rem;
         }
 
-        /* 6. بڑا فوٹر */
+        /* فیملی کی خوبصورت تصویر کی سٹائلنگ */
+        .family-image-container {
+            margin-top: 25px;
+            text-align: center;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .family-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* بڑا فوٹر */
         footer {
             margin-top: 40px;
             background: #0f172a;
@@ -229,14 +246,14 @@
 </head>
 <body onload="initApp()">
 
-    <!-- 1. بڑا ہیڈر -->
+    <!-- بڑا ہیڈر -->
     <header>
         <h1>میرا ماہانہ حساب</h1>
     </header>
 
     <div class="portal-container">
 
-        <!-- 2. مین ڈیش بورڈ: چاروں بٹنز ایک لائن میں اور ایک ہی لائن میں 3 گراف -->
+        <!-- مین ڈیش بورڈ -->
         <div id="tab-hisab" class="section-card active-section">
             <h2 class="section-title">📊 مرکزی مالیاتی ڈیش بورڈ</h2>
 
@@ -260,7 +277,7 @@
                 </div>
             </div>
 
-            <!-- 4. تینوں مالیاتی گراف ایک ہی لائن میں -->
+            <!-- تینوں مالیاتی گراف ایک ہی لائن میں -->
             <h3 style="margin-top: 10px; margin-bottom: 10px;">📈 مالیاتی گراف (آمدن، خرچ، بچت):</h3>
             <div class="charts-container">
                 <div class="chart-box">
@@ -276,10 +293,15 @@
                     <canvas id="balanceChart"></canvas>
                 </div>
             </div>
-            <!-- 5. حالیہ تاریخچہ (History) یہاں سے ختم کر دیا گیا ہے -->
+
+            <!-- 1. مالیاتی گراف کے نیچے فیملی کی تصویر -->
+            <div class="family-image-container">
+                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fstackoverflow.com%2F...&psig=...&ust=..." alt="خوشحال فیملی" style="display:none;" /> <!-- Placeholder fallback -->
+                <img src="watermarked_img_1323761495528244343.jpg" alt="خوشحال فیملی کی تصویر">
+            </div>
         </div>
 
-        <!-- 3. کل آمدن کا نیا صفحہ (جس میں نیا اندراج کا فارم موجود ہے) -->
+        <!-- کل آمدن کا نیا صفحہ -->
         <div id="tab-income-page" class="section-card">
             <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
             <h2 class="section-title">💵 کل آمدن اور نیا اندراج</h2>
@@ -287,7 +309,6 @@
                 <h3>موجودہ کل آمدن: <span id="income-page-total" style="color: var(--success-color);">Rs. 0</span></h3>
             </div>
 
-            <!-- نیا اندراج کا فارم -->
             <h3>نیا اندراج کریں:</h3>
             <div class="input-group" style="margin-top: 10px;">
                 <input type="text" id="desc" placeholder="تفصیل (مثلاً: گھر کا راشن، تنخواہ)">
@@ -342,7 +363,7 @@
             <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
             <h2 class="section-title">ℹ️ ہمارے بارے میں (About Us)</h2>
             <p style="line-height: 1.8; color: #475569; font-size: 1.05rem;">
-                "میرا ماہانہ حساب" ایک جدید اور آسان ڈیجیٹل مالیاتی پلیٹ فارم ہے جو آپ کو اپنے روزمرہ کے اخراجات، آمدن، اور بچت کا حساب کتاب رکھنے میں مدد فراہم کرتا ہے۔ اس کا مقصد آپ کی مالی زندگی کو منظم بنانا اور آپ کے ترقیاتی اہداف کو آسان بنانا ہے۔
+                "میرا ماہانہ حساب" ایک جدید اور آسان ڈیجیٹل مالیاتی پلیٹ فارم ہے جو آپ کو اپنے روزمرہ کے اخراجات، آمدن، اور بچت کا حساب کتاب رکھنے میں مدد فراہم کرتا ہے۔
             </p>
         </div>
 
@@ -351,7 +372,7 @@
             <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
             <h2 class="section-title">🔒 پرائیویسی پالیسی (Privacy Policy)</h2>
             <p style="line-height: 1.8; color: #475569; font-size: 1.05rem;">
-                آپ کی رازداری ہمارے لیے انتہائی اہم ہے۔ اس ایپلیکیشن میں درج کیا جانے والا تمام مالیاتی ڈیٹا اور معلومات آپ کے اپنے براؤزر کے لوکل سٹوریج (Local Storage) میں محفوظ ہوتی ہیں، اور کسی بھی بیرونی سرور پر منتقل نہیں کی جاتیں۔
+                آپ کی رازداری ہمارے لیے انتہائی اہم ہے۔ اس ایپلیکیشن میں درج کیا جانے والا تمام ڈیٹا آپ کے اپنے براؤزر کے لوکل سٹوریج میں محفوظ ہوتا ہے۔
             </p>
         </div>
 
@@ -359,7 +380,6 @@
         <div id="tab-contact" class="section-card">
             <button class="btn-back" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
             <h2 class="section-title">📞 رابطہ کریں (Contact Us)</h2>
-            <p style="margin-bottom: 15px; color: #475569;">اگر آپ کو کوئی سوال پوچھنا ہو یا کوئی تجاویز دینی ہوں تو آپ ہم سے رابطہ کر سکتے ہیں:</p>
             <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 1.05rem;">
                 <p><strong>ای میل:</strong> support@merasahisab.com</p>
                 <p style="margin-top: 10px;"><strong>فون:</strong> +92 300 0000000</p>
@@ -368,13 +388,19 @@
 
     </div>
 
-    <!-- 6. بڑا فوٹر -->
+    <!-- بڑا فوٹر -->
     <footer>
         <div class="footer-links">
             <button class="footer-btn" onclick="switchSection('tab-about')">About Us</button>
             <button class="footer-btn" onclick="switchSection('tab-privacy')">Privacy</button>
             <button class="footer-btn" onclick="switchSection('tab-contact')">Contact Us</button>
         </div>
+        
+        <!-- 2. فوٹر کے نیچے فیملی کی تصویر -->
+        <div style="max-width: 450px; margin: 20px auto 10px auto;">
+            <img src="watermarked_img_1323761495528244343.jpg" alt="خوشحال فیملی" style="width: 100%; border-radius: 8px; border: 2px solid #475569; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        </div>
+
         <p style="font-size: 0.95rem; color: #94a3b8; margin-top: 15px;">&copy; 2026 میرا ماہانہ حساب - جملہ حقوق محفوظ ہیں۔</p>
     </footer>
 
