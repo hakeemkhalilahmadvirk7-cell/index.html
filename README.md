@@ -27,6 +27,9 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             padding: 15px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
@@ -39,33 +42,9 @@
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
 
-        /* Nav Tabs */
-        .nav-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            background: #cbd5e1;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: 0.3s;
-        }
-
-        .tab-btn.active {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        /* Layout Container */
+        /* Portal Container & Layout */
         .portal-container {
+            flex: 1;
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -76,7 +55,7 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            display: none; /* Hidden by default, controlled by JS tabs */
+            display: none; /* Hidden by default */
         }
 
         .section-card.active-section {
@@ -90,12 +69,13 @@
             color: var(--primary-color);
         }
 
-        /* Dashboard Stats */
+        /* Dashboard Stats Grid (Now includes Dev Plan button aligned with stats) */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 12px;
             margin-bottom: 20px;
+            align-items: stretch;
         }
 
         .stat-box {
@@ -108,6 +88,30 @@
         .income-bg { background-color: var(--success-color); }
         .expense-bg { background-color: var(--danger-color); }
         .balance-bg { background-color: #0284c7; }
+
+        .plan-btn-box {
+            background-color: var(--primary-color);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .plan-btn-box:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .plan-btn-box h4 {
+            font-size: 1.1rem;
+        }
 
         /* Form Styling */
         .input-group {
@@ -167,6 +171,40 @@
             padding: 8px 0;
             border-bottom: 1px solid #e2e8f0;
         }
+
+        /* Footer Styling */
+        footer {
+            margin-top: 30px;
+            background: #1e293b;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .footer-btn {
+            background: transparent;
+            border: 1px solid #cbd5e1;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-btn:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
     </style>
 </head>
 <body onload="initApp()">
@@ -175,20 +213,13 @@
         <h1>میرا ماہانہ حساب</h1>
     </header>
 
-    <!-- Navigation Tabs -->
-    <div class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('tab-hisab', event)">۱. میرا حساب</button>
-        <button class="tab-btn" onclick="switchTab('tab-form', event)">نیا اندراج کریں</button>
-        <button class="tab-btn" onclick="switchTab('tab-plan', event)">۲. میرا ترقیاتی منصوبہ</button>
-    </div>
-
     <div class="portal-container">
 
-        <!-- SECTION 1: میرا حساب (Dashboard, Graphs & History) -->
+        <!-- SECTION 1: مرکزی ڈیش بورڈ (کل آمدن، خرچ، بچت اور ترقیاتی منصوبے کا بٹن) -->
         <div id="tab-hisab" class="section-card active-section">
-            <h2 class="section-title">📊 میرا حساب (لائیو ڈیش بورڈ)</h2>
+            <h2 class="section-title">📊 مرکزی مالیاتی ڈیش بورڈ</h2>
 
-            <!-- Stats Bar -->
+            <!-- Stats & Plan Button Grid -->
             <div class="stats-grid">
                 <div class="stat-box income-bg">
                     <h4>کل آمدن</h4>
@@ -199,9 +230,32 @@
                     <p id="total-expense">Rs. 0</p>
                 </div>
                 <div class="stat-box balance-bg">
-                    <h4>بچت</h4>
+                    <h4>بقايا رقم</h4>
                     <p id="net-balance">Rs. 0</p>
                 </div>
+                <!-- Developer Plan Button aligned with stats -->
+                <div class="plan-btn-box" onclick="switchSection('tab-plan')">
+                    <h4>🚀 میرا ترقیاتی منصوبہ</h4>
+                    <p style="font-size: 0.85rem; margin-top: 5px;">نیا پیج کھولیں</p>
+                </div>
+            </div>
+
+            <!-- Transaction Form (ابھی ڈیش بورڈ میں شامل ہے تاکہ ڈیٹا درج کیا جا سکے) -->
+            <h3 style="margin-top: 20px;">نیا اندراج کریں:</h3>
+            <div class="input-group" style="margin-top: 10px;">
+                <input type="text" id="desc" placeholder="تفصیل (مثلاً: گھر کا راشن، تنخواہ)">
+                <input type="number" id="amount" placeholder="رقم (روپے)">
+                <select id="type">
+                    <option value="income">آمدن (+)</option>
+                    <option value="expense">خرچہ (-)</option>
+                </select>
+                <select id="folder-select">
+                    <option value="عام">عام فولڈر</option>
+                    <option value="گروسری">گروسری و راشن</option>
+                    <option value="یوٹیلٹی بلز">یوٹیلٹی بلز</option>
+                    <option value="صحت و ادویات">صحت و ادویات</option>
+                </select>
+                <button class="btn-add" onclick="addTransaction()">شامل کریں</button>
             </div>
 
             <!-- 3 Financial Graphs Section -->
@@ -225,39 +279,58 @@
             <ul id="history" class="history-list"></ul>
         </div>
 
-        <!-- SECTION 2: نیا اندراج کرنے کا فارم (اب الگ ٹیب/صفحے پر ہے) -->
-        <div id="tab-form" class="section-card">
-            <h2 class="section-title">📝 نیا اندراج کریں</h2>
-            <div class="input-group">
-                <input type="text" id="desc" placeholder="تفصیل (مثلاً: گھر کا راشن، تنخواہ)">
-                <input type="number" id="amount" placeholder="رقم (روپے)">
-                <select id="type">
-                    <option value="income">آمدن (+)</option>
-                    <option value="expense">خرچہ (-)</option>
-                </select>
-                <select id="folder-select">
-                    <option value="عام">عام فولڈر</option>
-                    <option value="گروسری">گروسری و راشن</option>
-                    <option value="یوٹیلٹی بلز">یوٹیلٹی بلز</option>
-                    <option value="صحت و ادویات">صحت و ادویات</option>
-                </select>
-                <button class="btn-add" onclick="addTransaction()">شامل کریں</button>
-            </div>
-            <p id="form-status" style="color: var(--success-color); font-weight: bold; margin-top: 10px;"></p>
-        </div>
-
-        <!-- SECTION 3: میرا ترقیاتی منصوبہ -->
+        <!-- SECTION 2: میرا ترقیاتی منصوبہ (نیا پیج) -->
         <div id="tab-plan" class="section-card">
+            <button class="footer-btn" style="background: #64748b; margin-bottom: 15px;" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
             <h2 class="section-title">🚀 میرا ترقیاتی منصوبہ</h2>
             <p style="margin-bottom: 15px;">اپنے مالی اور ذاتی ترقیاتی اہداف یہاں درج کریں:</p>
             <div class="input-group">
-                <textarea id="dev-plan-text" rows="6" placeholder="اپنے اهداف اور منصوبے یہاں لکھیں..." style="resize: vertical;"></textarea>
+                <textarea id="dev-plan-text" rows="6" placeholder="اپنے اہداف اور منصوبے یہاں لکھیں..." style="resize: vertical;"></textarea>
                 <button class="btn-add" onclick="saveDevPlan()">منصوبہ محفوظ کریں</button>
             </div>
             <p id="plan-status" style="color: var(--success-color); font-weight: bold; margin-top: 10px;"></p>
         </div>
 
+        <!-- SECTION 3: About Us (نیا پیج) -->
+        <div id="tab-about" class="section-card">
+            <button class="footer-btn" style="background: #64748b; margin-bottom: 15px;" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            <h2 class="section-title">ℹ️ ہمارے بارے میں (About Us)</h2>
+            <p style="line-height: 1.8; color: #475569;">
+                "میرا ماہانہ حساب" ایک جدید اور آسان ڈیجیٹل مالیاتی پلیٹ فارم ہے جو آپ کو اپنے روزمرہ کے اخراجات، آمدن، اور بچت کا حساب کتاب رکھنے میں مدد فراہم کرتا ہے۔ اس کا مقصد آپ کی مالی زندگی کو منظم بنانا اور آپ کے ترقیاتی اہداف کو آسان بنانا ہے۔
+            </p>
+        </div>
+
+        <!-- SECTION 4: Privacy Policy (نیا پیج) -->
+        <div id="tab-privacy" class="section-card">
+            <button class="footer-btn" style="background: #64748b; margin-bottom: 15px;" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            <h2 class="section-title">🔒 پرائیویسی پالیسی (Privacy Policy)</h2>
+            <p style="line-height: 1.8; color: #475569;">
+                آپ کی رازداری ہمارے لیے انتہائی اہم ہے۔ اس ایپلیکیشن میں درج کیا جانے والا تمام مالیاتی ڈیٹا اور معلومات آپ کے اپنے براؤزر کے لوکل سٹوریج (Local Storage) میں محفوظ ہوتی ہیں، اور کسی بھی بیرونی سرور پر منتقل نہیں کی جاتیں۔ آپ کا ڈیٹا مکمل طور پر محفوظ ہے۔
+            </p>
+        </div>
+
+        <!-- SECTION 5: Contact Us (نیا پیج) -->
+        <div id="tab-contact" class="section-card">
+            <button class="footer-btn" style="background: #64748b; margin-bottom: 15px;" onclick="switchSection('tab-hisab')">← واپس ڈیش بورڈ پر جائیں</button>
+            <h2 class="section-title">📞 رابطہ کریں (Contact Us)</h2>
+            <p style="margin-bottom: 15px; color: #475569;">اگر آپ کو کوئی سوال پوچھنا ہو یا کوئی تجاویز دینی ہوں تو آپ ہم سے رابطہ کر سکتے ہیں:</p>
+            <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                <p><strong>ای میل:</strong> support@merasahisab.com</p>
+                <p style="margin-top: 8px;"><strong>فون:</strong> +92 300 0000000</p>
+            </div>
+        </div>
+
     </div>
+
+    <!-- FOOTER SECTION -->
+    <footer>
+        <div class="footer-links">
+            <button class="footer-btn" onclick="switchSection('tab-about')">About Us</button>
+            <button class="footer-btn" onclick="switchSection('tab-privacy')">Privacy</button>
+            <button class="footer-btn" onclick="switchSection('tab-contact')">Contact Us</button>
+        </div>
+        <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 10px;">&copy; 2026 میرا ماہانہ حساب - جملہ حقوق محفوظ ہیں۔</p>
+    </footer>
 
     <script>
         let totalIncome = 0;
@@ -348,11 +421,6 @@
             document.getElementById('amount').value = '';
             
             saveData();
-            
-            document.getElementById('form-status').innerText = 'اندراج کامیابی سے شامل کر لیا گیا ہے!';
-            setTimeout(() => {
-                document.getElementById('form-status').innerText = '';
-            }, 3000);
         }
 
         function updateDashboard() {
@@ -372,16 +440,13 @@
             });
         }
 
-        // Tab Switching Logic
-        function switchTab(tabId, event) {
+        // Section/Page Switching Logic
+        function switchSection(sectionId) {
             const sections = document.querySelectorAll('.section-card');
             sections.forEach(sec => sec.classList.remove('active-section'));
 
-            document.getElementById(tabId).classList.add('active-section');
-
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            document.getElementById(sectionId).classList.add('active-section');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function saveData() {
